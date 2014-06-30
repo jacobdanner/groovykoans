@@ -9,17 +9,17 @@ package org.groovykoans.koan12
 
 class StaticFactory {
 
-    List<Integer> numbers
+  List<Integer> numbers
 
-    public static Worker getWorker() {
-        new HardWorker()
-    }
+  public static Worker getWorker() {
+    new HardWorker()
+  }
 
-    List<Integer> work() {
-        numbers.collect {
-            getWorker().work(it)
-        }
+  List<Integer> work() {
+    numbers.collect {
+      getWorker().work(it)
     }
+  }
 
 
 }

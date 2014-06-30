@@ -8,5 +8,5 @@
 package org.groovykoans.koan09
 
 class ConstantsOnEarth {
-    def gravity = 1
+  def gravity = 1
 }

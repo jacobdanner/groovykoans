@@ -9,9 +9,9 @@ package org.groovykoans.koan12
 
 public interface Worker {
 
-    /**
-     * Performs some heavy calculations in order to increment the given number
-     */
-    int work(int number);
+  /**
+   * Performs some heavy calculations in order to increment the given number
+   */
+  int work(int number);
 
 }

@@ -8,11 +8,10 @@
 package org.groovykoans.koan03
 
 class NameWithDefaultValue {
-    String name
+  String name
 
-    // ------------ START EDITING HERE ----------------------
+  // ------------ START EDITING HERE ----------------------
 
-
-    // ------------ STOP EDITING HERE  ----------------------
+  // ------------ STOP EDITING HERE  ----------------------
 
 }

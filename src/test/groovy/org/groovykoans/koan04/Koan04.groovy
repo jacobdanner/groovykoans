@@ -20,158 +20,149 @@ package org.groovykoans.koan04
  */
 class Koan04 extends GroovyTestCase {
 
-    void test01_IntroToClosures() {
-        // Closures are probably the most important feature Groovy has to offer. Unfortunately, they're
-        // tricky to understand if you have never done any functional programming.
+  void test01_IntroToClosures() {
+    // Closures are probably the most important feature Groovy has to offer. Unfortunately, they're
+    // tricky to understand if you have never done any functional programming.
 
-        // In short, Closures are somewhat like function objects. They contain code that may (or may not) be executed at
-        // a later time and have access to variables you pass into them (as well as implicit and free variables that
-        // were defined in the environment it was declared in).
+    // In short, Closures are somewhat like function objects. They contain code that may (or may not) be executed at
+    // a later time and have access to variables you pass into them (as well as implicit and free variables that
+    // were defined in the environment it was declared in).
 
-        // Let's start with a simple example.
-        def sayHelloClosure = { return 'Hello from Closure' }
+    // Let's start with a simple example.
+    def sayHelloClosure = { return 'Hello from Closure' }
 
-        // We can then execute it as if it were a regular method, using:
-        def helloClosureResult = sayHelloClosure()
+    // We can then execute it as if it were a regular method, using:
+    def helloClosureResult = sayHelloClosure()
 
-        // What is the result from the above execution?
-        def expectedHelloClosureResult
-        // ------------ START EDITING HERE ----------------------
+    // What is the result from the above execution?
+    def expectedHelloClosureResult
+    // ------------ START EDITING HERE ----------------------
 
+    // ------------ STOP EDITING HERE  ----------------------
+    assert helloClosureResult == expectedHelloClosureResult
 
-        // ------------ STOP EDITING HERE  ----------------------
-        assert helloClosureResult == expectedHelloClosureResult
+    // Closures can also accept parameters, like so
+    def personalizedHelloClosure = { String name -> return "Hello $name" }
+    String helloRonalda = personalizedHelloClosure('Ronalda')
 
-        // Closures can also accept parameters, like so
-        def personalizedHelloClosure = { String name -> return "Hello $name" }
-        String helloRonalda = personalizedHelloClosure('Ronalda')
+    // What is the result from the above execution?
+    String expectedHelloRonalda
+    // ------------ START EDITING HERE ----------------------
 
-        // What is the result from the above execution?
-        String expectedHelloRonalda
-        // ------------ START EDITING HERE ----------------------
+    // ------------ STOP EDITING HERE  ----------------------
+    assert helloRonalda == expectedHelloRonalda
 
+    // But there's a shorthand version for this. One parameter closures implicitly add a variable named 'it'
+    // which represents that single parameter. We also learned that 'return' isn't mandatory in functions if
+    // the last statement is the return statement. Combining those two facts, we get:
+    def happyBirthdayClosure = { "Happy Birthday To $it" }
+    String happyBirthdayGranger = happyBirthdayClosure('Hermione')
 
-        // ------------ STOP EDITING HERE  ----------------------
-        assert helloRonalda == expectedHelloRonalda
+    // What is the result from the above execution?
+    def expectedHappyBirthdayGranger
+    // ------------ START EDITING HERE ----------------------
 
-        // But there's a shorthand version for this. One parameter closures implicitly add a variable named 'it'
-        // which represents that single parameter. We also learned that 'return' isn't mandatory in functions if
-        // the last statement is the return statement. Combining those two facts, we get:
-        def happyBirthdayClosure = { "Happy Birthday To $it" }
-        String happyBirthdayGranger = happyBirthdayClosure('Hermione')
+    // ------------ STOP EDITING HERE  ----------------------
+    assert happyBirthdayGranger == expectedHappyBirthdayGranger
 
-        // What is the result from the above execution?
-        def expectedHappyBirthdayGranger
-        // ------------ START EDITING HERE ----------------------
+    // Create a closure that accepts two integers, adds them, and multiplies the result by two
+    def resultClosure
+    // ------------ START EDITING HERE ----------------------
 
+    // ------------ STOP EDITING HERE  ----------------------
 
-        // ------------ STOP EDITING HERE  ----------------------
-        assert happyBirthdayGranger == expectedHappyBirthdayGranger
+    assert resultClosure(2, 3) == 10
+    shouldFail {
+      resultClosure('one', 'two')
+    }
+  }
 
-        // Create a closure that accepts two integers, adds them, and multiplies the result by two
-        def resultClosure
-        // ------------ START EDITING HERE ----------------------
+  void test02_MoreClosureIntro() {
+    // Now that you're familiar with Closures, you can read about them here:
+    // http://groovy.codehaus.org/Closures
+    // http://groovy.codehaus.org/Closures+-+Informal+Guide
+    // http://groovy.codehaus.org/Closures+-+Formal+Definition
 
+    // So how can we use closures? Everywhere. Groovy adds a lot of convenience methods on top of regular
+    // Java constructs.
 
-        // ------------ STOP EDITING HERE  ----------------------
-
-        assert resultClosure(2, 3) == 10
-        shouldFail {
-            resultClosure('one', 'two')
-        }
+    def list = ['one', 'two', 'three']
+    // In Java, if you wanted to create a list of all items beginning with 't', you would do the following:
+    List<String> javaResult = new ArrayList<String>();
+    for (String s : list) {
+      if (s.startsWith("t")) {
+        javaResult.add(s);
+      }
     }
 
-    void test02_MoreClosureIntro() {
-        // Now that you're familiar with Closures, you can read about them here:
-        // http://groovy.codehaus.org/Closures
-        // http://groovy.codehaus.org/Closures+-+Informal+Guide
-        // http://groovy.codehaus.org/Closures+-+Formal+Definition
+    // In Groovy (with closures), it's much simpler
+    List<String> groovyResult = list.grep({ it.startsWith('t') })
 
-        // So how can we use closures? Everywhere. Groovy adds a lot of convenience methods on top of regular
-        // Java constructs.
+    // Let's check that we got the same result (you can use the assertX methods)
+    // ------------ START EDITING HERE ----------------------
 
-        def list = ['one', 'two', 'three']
-        // In Java, if you wanted to create a list of all items beginning with 't', you would do the following:
-        List<String> javaResult = new ArrayList<String>();
-        for (String s : list) {
-            if (s.startsWith("t")) {
-                javaResult.add(s);
-            }
-        }
+    // ------------ STOP EDITING HERE  ----------------------
 
-        // In Groovy (with closures), it's much simpler
-        List<String> groovyResult = list.grep({ it.startsWith('t') })
+    // To make the code even cleaner, Groovy allows some syntactic sugar. If your method has a closure as its
+    // last parameter, it can be separated from the rest of the parameters as such:
 
-        // Let's check that we got the same result (you can use the assertX methods)
-        // ------------ START EDITING HERE ----------------------
-
-
-        // ------------ STOP EDITING HERE  ----------------------
-
-        // To make the code even cleaner, Groovy allows some syntactic sugar. If your method has a closure as its
-        // last parameter, it can be separated from the rest of the parameters as such:
-
-        def monkeyColors = []
-        // http://groovy.codehaus.org/groovy-jdk/java/lang/String.html#eachMatch(java.lang.String, groovy.lang.Closure)
-        "I have seen blue monkeys, red monkeys, and purple monkeys".eachMatch('(\\w+) monkeys') { entireMatch, color ->
-            monkeyColors.add(color)
-        }
-
-        // What will monkeyColors contain?
-        def expectedMonkeyColors = []
-        // ------------ START EDITING HERE ----------------------
-
-
-        // ------------ STOP EDITING HERE  ----------------------
-        assert monkeyColors == expectedMonkeyColors
-
-        // Okay. Time for an exercise. Have a look at Groovy's additions on top of the File class by reading
-        // docs at http://groovy.codehaus.org/groovy-jdk/java/io/File.html
-        // Once done, read the content of "exercise.txt" (it's right next to the file you're viewing) into a
-        // StringWriter but leave out the lines that begin with #.
-
-        StringWriter filteredResult = new StringWriter()
-        def prefix = 'src/test/groovy/org/groovykoans/koan04/'
-        // ------------ START EDITING HERE ----------------------
-
-
-        // ------------ STOP EDITING HERE  ----------------------
-
-        String result = filteredResult.toString().trim().replaceAll(/[\n\r]+/, /\n/)
-        String answer = new File("$prefix/exercise-solved.txt").text.replaceAll(/[\n\r]+/, /\n/)
-        assert answer == result
+    def monkeyColors = []
+    // http://groovy.codehaus.org/groovy-jdk/java/lang/String.html#eachMatch(java.lang.String, groovy.lang.Closure)
+    "I have seen blue monkeys, red monkeys, and purple monkeys".eachMatch('(\\w+) monkeys') { entireMatch, color ->
+      monkeyColors.add(color)
     }
 
-    void test03_MoreClosureSyntacticSugar() {
-        // Depending on personal preference, you can choose to omit parenthesis from method calls if there is at least
-        // one parameter and no ambiguity. For example:
+    // What will monkeyColors contain?
+    def expectedMonkeyColors = []
+    // ------------ START EDITING HERE ----------------------
 
-        def count = "That ain't no woman! It's a man, man!".count 'man'
+    // ------------ STOP EDITING HERE  ----------------------
+    assert monkeyColors == expectedMonkeyColors
 
-        // Can you guess what count() does? If not, look it up in
-        // http://groovy.codehaus.org/groovy-jdk/java/lang/String.html
-        def expectedCount
-        // ------------ START EDITING HERE ----------------------
+    // Okay. Time for an exercise. Have a look at Groovy's additions on top of the File class by reading
+    // docs at http://groovy.codehaus.org/groovy-jdk/java/io/File.html
+    // Once done, read the content of "exercise.txt" (it's right next to the file you're viewing) into a
+    // StringWriter but leave out the lines that begin with #.
 
+    StringWriter filteredResult = new StringWriter()
+    def prefix = 'src/test/groovy/org/groovykoans/koan04/'
+    // ------------ START EDITING HERE ----------------------
 
-        // ------------ STOP EDITING HERE  ----------------------
+    // ------------ STOP EDITING HERE  ----------------------
 
-        assert count == expectedCount
+    String result = filteredResult.toString().trim().replaceAll(/[\n\r]+/, /\n/)
+    String answer = new File("$prefix/exercise-solved.txt").text.replaceAll(/[\n\r]+/, /\n/)
+    assert answer == result
+  }
 
-        // Admittedly, that past example doesn't make the code any clearer.
-        // However, when we have methods with a closure as a parameter, it removes a lot of the noise:
-        def mysteryList = ['Groovy', 'Baby', 'Yeah'].findAll {  // no parenthesis
-            it.contains('a')
-        }
+  void test03_MoreClosureSyntacticSugar() {
+    // Depending on personal preference, you can choose to omit parenthesis from method calls if there is at least
+    // one parameter and no ambiguity. For example:
 
-        // What will the value of mysteryList be?
-        def expectedMysteryList
-        // ------------ START EDITING HERE ----------------------
+    def count = "That ain't no woman! It's a man, man!".count 'man'
 
+    // Can you guess what count() does? If not, look it up in
+    // http://groovy.codehaus.org/groovy-jdk/java/lang/String.html
+    def expectedCount
+    // ------------ START EDITING HERE ----------------------
 
-        // ------------ STOP EDITING HERE  ----------------------
-        assert mysteryList == expectedMysteryList
+    // ------------ STOP EDITING HERE  ----------------------
 
+    assert count == expectedCount
+
+    // Admittedly, that past example doesn't make the code any clearer.
+    // However, when we have methods with a closure as a parameter, it removes a lot of the noise:
+    def mysteryList = ['Groovy', 'Baby', 'Yeah'].findAll {  // no parenthesis
+      it.contains('a')
     }
+
+    // What will the value of mysteryList be?
+    def expectedMysteryList
+    // ------------ START EDITING HERE ----------------------
+
+    // ------------ STOP EDITING HERE  ----------------------
+    assert mysteryList == expectedMysteryList
+
+  }
 
 }

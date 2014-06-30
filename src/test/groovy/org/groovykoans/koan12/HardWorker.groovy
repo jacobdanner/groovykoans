@@ -9,9 +9,9 @@ package org.groovykoans.koan12
 
 class HardWorker implements Worker {
 
-    @Override
-    int work(int number) {
-        Thread.sleep(1000)
-        return number + 10;
-    }
+  @Override
+  int work(int number) {
+    Thread.sleep(1000)
+    return number + 10;
+  }
 }

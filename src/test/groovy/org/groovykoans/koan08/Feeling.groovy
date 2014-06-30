@@ -8,12 +8,11 @@
 package org.groovykoans.koan08
 
 public enum Feeling {
-    Happy, Sad, Neutral, Suicidal, Anticipation, Surprised, Relaxed, Guilty
+  Happy, Sad, Neutral, Suicidal, Anticipation, Surprised, Relaxed, Guilty
 
-    // ------------ START EDITING HERE ----------------------
+  // ------------ START EDITING HERE ----------------------
 
-
-    // ------------ STOP EDITING HERE  ----------------------
+  // ------------ STOP EDITING HERE  ----------------------
 
 
 }

@@ -20,63 +20,60 @@ import spock.lang.Unroll
 @Stepwise
 class Koan13 extends Specification {
 
-    def "introduction to Spock"() {
-        // Noticed something different about this Koan? We're now using the Spock testing framework.
-        // Spock relies on the power of Groovy to allow simpler and better structured unit tests as well as
-        // a groovy mocking framework. Note how much easier it is to read the test case title!
+  def "introduction to Spock"() {
+    // Noticed something different about this Koan? We're now using the Spock testing framework.
+    // Spock relies on the power of Groovy to allow simpler and better structured unit tests as well as
+    // a groovy mocking framework. Note how much easier it is to read the test case title!
 
-        // Let's start. Spock has one mandatory block - 'expect'. You can find more information at the link above
-        // and then make the following pass
-        expect:
-        def circum = { r -> 2 * Math.PI * r }
-        // ------------ START EDITING HERE ----------------------
+    // Let's start. Spock has one mandatory block - 'expect'. You can find more information at the link above
+    // and then make the following pass
+    expect:
+    def circum = { r -> 2 * Math.PI * r }
+    // ------------ START EDITING HERE ----------------------
 
+    // ------------ STOP EDITING HERE  ----------------------
+    circum(r) == 2
+  }
 
-        // ------------ STOP EDITING HERE  ----------------------
-        circum(r) == 2
-    }
+  def "testing magic formula"(a, b, expectedResult) {
+    // Let's use the 'where' block. This actually executes the test 5 times with 5 different parameters.
+    // Fill in the blanks in magicFormula below.
+    expect:
+    magicFormula(a, b) == expectedResult
 
-    def "testing magic formula"(a, b, expectedResult) {
-        // Let's use the 'where' block. This actually executes the test 5 times with 5 different parameters.
-        // Fill in the blanks in magicFormula below.
-        expect:
-        magicFormula(a, b) == expectedResult
+    where:
+    a   | b | expectedResult
+    1   | 1 | 3
+    2   | 2 | 6
+    3   | 3 | 11
+    3   | 0 | 2
+    'a' | 2 | 'aa2'
 
-        where:
-        a   | b | expectedResult
-        1   | 1 | 3
-        2   | 2 | 6
-        3   | 3 | 11
-        3   | 0 | 2
-        'a' | 2 | 'aa2'
+  }
 
-    }
+  def magicFormula(a, b) {
+    // ------------ START EDITING HERE ----------------------
 
-    def magicFormula(a, b) {
-        // ------------ START EDITING HERE ----------------------
+    // ------------ STOP EDITING HERE  ----------------------
+  }
 
+  @Unroll
+  def "check if #a times #b equals #c"() {
+    // Fix the 'where' block to make this test pass for all ints a,b such that 0<= a,b <=10 (121 permutations).
+    // Also note how we now used @Unroll and derived the parameter names from the test name
+    expect:
+    advancedMultiplication(a, b) == c
 
-        // ------------ STOP EDITING HERE  ----------------------
-    }
+    where:
+    // Hint - this can be done in three lines
+    // ------------ START EDITING HERE ----------------------
 
-    @Unroll
-    def "check if #a times #b equals #c"() {
-        // Fix the 'where' block to make this test pass for all ints a,b such that 0<= a,b <=10 (121 permutations).
-        // Also note how we now used @Unroll and derived the parameter names from the test name
-        expect:
-        advancedMultiplication(a, b) == c
+    // ------------ STOP EDITING HERE  ----------------------
+    c = a * b
+  }
 
-        where:
-        // Hint - this can be done in three lines
-        // ------------ START EDITING HERE ----------------------
-
-
-        // ------------ STOP EDITING HERE  ----------------------
-        c = a * b
-    }
-
-    def advancedMultiplication(a, b) {
-        (2 * a * 2 * b) / 4
-    }
+  def advancedMultiplication(a, b) {
+    (2 * a * 2 * b) / 4
+  }
 
 }

@@ -10,8 +10,7 @@ package org.groovykoans.koan09
 import org.codehaus.groovy.runtime.InvokerHelper
 
 class Robot {
-    // ------------ START EDITING HERE ----------------------
+  // ------------ START EDITING HERE ----------------------
 
-
-    // ------------ STOP EDITING HERE  ----------------------
+  // ------------ STOP EDITING HERE  ----------------------
 }
